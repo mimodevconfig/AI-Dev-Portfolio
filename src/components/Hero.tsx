@@ -78,7 +78,11 @@ export default function Hero() {
             },
             {
               start: { lat: 37.7749, lng: -122.4194 }, // San Francisco
-              end: { lat: 55.7558, lng: 37.6173 }, // Moscow
+              end: { lat: 38.1157, lng: 13.3615 }, // Palermo
+            },
+            {
+              start: { lat: 41.8101, lng: 68.9063 }, // Patagonia
+              end: { lat: 4.0435, lng: 39.6682 }, // Mombasa
             },
           ]}
           lineColor="#569CD6" // Using IDE theme link color
