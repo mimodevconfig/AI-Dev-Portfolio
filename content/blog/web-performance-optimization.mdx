@@ -1,0 +1,184 @@
+---
+title: "Web Performance Optimization Techniques for 2025"
+date: "2025-05-20"
+excerpt: "Learn the latest techniques to make your websites lightning fast in 2025."
+author: "Sarah Johnson"
+category: "Performance"
+tags: ["Web Performance", "Optimization", "Frontend"]
+coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+---
+
+# Web Performance Optimization Techniques for 2025
+
+Web performance continues to be a critical factor in user experience and SEO. Here are the most effective optimization techniques for 2025.
+
+## Core Web Vitals in 2025
+
+Google's Core Web Vitals have evolved. The current metrics to focus on are:
+
+1. **Largest Contentful Paint (LCP)**: Should occur within 2.0 seconds
+2. **First Input Delay (FID)**: Should be less than 50 milliseconds
+3. **Cumulative Layout Shift (CLS)**: Should be less than 0.1
+4. **Interaction to Next Paint (INP)**: Should be less than 150 milliseconds
+
+## Image Optimization
+
+### Next-Gen Formats
+
+Use modern image formats with better compression:
+
+```html
+<picture>
+  <source srcset="image.avif" type="image/avif">
+  <source srcset="image.webp" type="image/webp">
+  <img src="image.jpg" alt="Description" loading="lazy">
+</picture>
+```
+
+### Responsive Images
+
+Serve appropriately sized images:
+
+```html
+<img 
+  srcset="image-320w.jpg 320w, image-480w.jpg 480w, image-800w.jpg 800w" 
+  sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px" 
+  src="image-800w.jpg" 
+  alt="Description"
+  loading="lazy"
+>
+```
+
+## JavaScript Optimization
+
+### Code Splitting
+
+Split your JavaScript bundles to load only what's needed:
+
+```javascript
+// React example with dynamic imports
+import React, { lazy, Suspense } from 'react';
+
+const HeavyComponent = lazy(() => import('./HeavyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HeavyComponent />
+    </Suspense>
+  );
+}
+```
+
+### Web Workers
+
+Offload heavy computations to web workers:
+
+```javascript
+// main.js
+const worker = new Worker('worker.js');
+
+worker.postMessage({ data: complexData });
+worker.onmessage = (event) => {
+  const result = event.data;
+  updateUI(result);
+};
+
+// worker.js
+self.onmessage = (event) => {
+  const data = event.data;
+  const result = performComplexCalculation(data);
+  self.postMessage(result);
+};
+```
+
+## CSS Optimization
+
+### Critical CSS
+
+Inline critical CSS and defer non-critical CSS:
+
+```html
+<head>
+  <!-- Inline critical CSS -->
+  <style>
+    /* Critical styles needed for above-the-fold content */
+  </style>
+  
+  <!-- Defer non-critical CSS -->
+  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
+</head>
+```
+
+### Container Queries
+
+Use container queries for more efficient responsive designs:
+
+```css
+.container {
+  container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+```
+
+## Network Optimization
+
+### HTTP/3 and QUIC
+
+Ensure your server supports HTTP/3 and QUIC for faster connections.
+
+### Resource Hints
+
+Use resource hints to optimize resource loading:
+
+```html
+<link rel="preconnect" href="https://api.example.com">
+<link rel="preload" href="critical-font.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="prefetch" href="next-page.html">
+```
+
+## Rendering Optimization
+
+### Partial Hydration
+
+Only hydrate interactive parts of your page:
+
+```jsx
+import { Island } from 'your-framework';
+
+function Page() {
+  return (
+    <div>
+      <StaticContent />
+      <Island component={InteractiveComponent} />
+      <MoreStaticContent />
+    </div>
+  );
+}
+```
+
+### Streaming Server Rendering
+
+Stream HTML to the browser for faster initial rendering:
+
+```javascript
+// Node.js example with React 18+
+app.get('/', (req, res) => {
+  const { pipe } = renderToPipeableStream(<App />, {
+    bootstrapScripts: ['/client.js'],
+    onShellReady() {
+      res.setHeader('content-type', 'text/html');
+      pipe(res);
+    }
+  });
+});
+```
+
+By implementing these techniques, you'll create websites that not only load faster but also provide a smoother user experience, leading to better engagement, conversion rates, and search engine rankings.
