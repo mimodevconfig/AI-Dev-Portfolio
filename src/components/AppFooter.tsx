@@ -31,8 +31,12 @@ export default function AppFooter() {
           href: "https://linkedin.com/in/yourusername",
         },
         {
-          name: "Email",
-          href: "mailto:your.email@example.com",
+          name: "YouTube",
+          href: "https://youtube.com",
+        },
+				{
+          name: "Instagram",
+          href: "https://instagram.com",
         },
       ]}
       columns={[

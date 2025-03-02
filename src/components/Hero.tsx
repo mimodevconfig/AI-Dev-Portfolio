@@ -15,11 +15,11 @@ const SOCIAL_LINKS = [
     link: 'https://linkedin.com',
   },
   {
-    label: 'Email',
+    label: 'YouTube',
     link: 'mailto:contact@example.com',
   },
   {
-    label: 'Resume',
+    label: 'Instagram',
     link: '/resume.pdf',
   },
 ];
@@ -59,6 +59,18 @@ function MagneticSocialLink({
 }
 
 export default function Hero() {
+  // Handle smooth scrolling for section links
+  const handleSectionScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 80, // Offset for the fixed header
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-ide-bg-primary py-20 px-4 pt-24">
       <div className="absolute inset-0 opacity-10 overflow-hidden">
@@ -115,10 +127,18 @@ export default function Hero() {
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button href="#projects" variant="filled">
+              <Button 
+                href="#projects" 
+                variant="filled"
+                onClick={(e) => handleSectionScroll(e as React.MouseEvent<HTMLAnchorElement>, 'projects')}
+              >
                 View Projects
               </Button>
-              <Button href="#contact" variant="outlined">
+              <Button 
+                href="#contact" 
+                variant="outlined"
+                onClick={(e) => handleSectionScroll(e as React.MouseEvent<HTMLAnchorElement>, 'contact')}
+              >
                 Contact Me
               </Button>
             </div>

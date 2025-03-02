@@ -6,10 +6,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: 'default' | 'sm' | 'lg';
   asChild?: boolean;
   href?: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'filled', size = 'default', asChild = false, href, children, ...props }, ref) => {
+  ({ className, variant = 'filled', size = 'default', asChild = false, href, onClick, children, ...props }, ref) => {
     const baseStyles = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
     
     const variantStyles = {
@@ -35,6 +36,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <a 
           href={href} 
           className={classes}
+          onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
           {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
         >
           {children}
@@ -46,6 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         className={classes}
         ref={ref}
+        onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
         {...props}
       >
         {children}
