@@ -3,6 +3,7 @@ import { WorldMap } from './ui/world-map';
 import { GooeyText } from './ui/gooey-text-morphing';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Magnetic } from './ui/magnetic';
+import { Button } from './ui/button';
 
 const SOCIAL_LINKS = [
   {
@@ -114,12 +115,12 @@ export default function Hero() {
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <a href="#projects" className="ide-button">
+              <Button href="#projects" variant="filled">
                 View Projects
-              </a>
-              <a href="#contact" className="ide-button bg-transparent border-2 border-ide-text-primary hover:bg-ide-text-primary hover:text-ide-bg-primary">
+              </Button>
+              <Button href="#contact" variant="outlined">
                 Contact Me
-              </a>
+              </Button>
             </div>
             <div className="flex items-center justify-start space-x-3">
               {SOCIAL_LINKS.map((link) => (
@@ -136,7 +137,7 @@ export default function Hero() {
                   <AvatarImage src="https://images.unsplash.com/photo-1633332755192-727a05c4013d" alt="Mike Moceri" />
                   <AvatarFallback>MM</AvatarFallback>
                 </Avatar>
-                <span className="absolute -end-1 -top-1 scale-150">
+                <span className="absolute top-2 right-2 scale-150">
                   <span className="sr-only">Verified</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
